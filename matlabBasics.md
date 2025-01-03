@@ -80,7 +80,7 @@ folderName = fullfile("/","home","username","Documents","myFile.txt")
     z = x + y;
     stringToPrint = sprintf("The sum of x and y is: %d", z);
     disp(stringToPrint)
-    ```
+```
 ## Integrated Development Environments (IDE)
 - An IDE is a text editor program with dedicated functions for running and debugging various programming languages
 - Matlab is a fully contained programming language, which means that the program itself acts as an IDE as well as the interpreter, while in other languages such as Python or C++, you might write your code in an IDE and then compile and run your code in a separate program
