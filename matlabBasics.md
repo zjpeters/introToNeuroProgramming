@@ -4,95 +4,90 @@
 - A script is typically a single file that contains code that is intended to be run as a single file
     - This can range from something as simple as the code below displaying the sum of two numbers, to complicated analysis pipelines:
     ```Matlab
+    x = 5
+    y = 3
+    z = x + y
+    stringToPrint = sprintf("The sum of x and y is: %d", z)
+    disp(stringToPrint)
+    ```
+- Functions, also often called commands, are a type of code that are written to perform a certain task, i.e. a function that takes a set of numbers and calculates the mean value
+    - These functions can either be installed on your machine already as part of matlab or created by the user to be used in further scripts
+    - functions have the following formatting within matlab:
+    ```Matlab
+    function m = fibonacci(n)
+    if n == 0
+        m = 0;
+    elseif n == 1
+        m = 1;
+    else
+        m = fibonacci(n-1) + fibonacci(n - 2);
+    end
+    end
+    ```
+    - When working in matlab, it's important to note that the file containing the function must be saved with the same name as given in the first line function file, i.e. for the function above it must be saved as `fibonacci.m`
+- A program is typically a set of code that is executable by your system, and is not usually edited by the end user. 
+    - These are often made up of a combination of smaller scripts and functions, think of something like your web browser or Microsoft Office, that has lots of different components to create the program
+## The command window
+- The command window is the part of the matlab window that will display the results of running our commands
+- We can work directly in the command window, typing functions and viewing the results, however these commands won't be saved anywhere and will need to be re-run the next time we open matlab
+- A useful command to clear the contents of the command window is `clc`. This will remove the text in the command window, but won't affect your workspace or open figures.
+## The workspace window
+- The workspace will display all variables that have been generated during a particulat matlab session, as well as their datatype and size
+- If you have generated a lot of variables throughout your matlab session you can delete unused variables by selecting the variable and pressing `delete`, right clicking and selecting `delete`, or typing `clear variableName`
+- You can also type `clear` without any variable names in order to clear the entire workspace, this is commonly done when starting a new session, often along with `clc`, like so:
+    ```Matlab
+    clear; clc;
+    ```
+## Current folder window
+- This window shows the content of the window you are currently working inside of
+## Variables
+- Variables are assigned by typing a variable name followed by a single `=` and the value you would like to assign to the variable
+- Variables come in many types, including unsigned integers (0,1,2,3), floating point numbers (0.0, 3.14, 10.2), signed integers (-3,-2,-1,0,1,2,3), strings of text('hello world'), and more
+## Data types
+- `int8`, `int16` - a signed integer of either 8 or 16 bits in size. This can be any integer number of positive or negative value
+- `uint8`, `uint16` - an unsigned integer of either 8 or 16 bits in size. Can only be positive, assigning a negative value to an unsigned integer will give you an incorrect value
+- `double` - a double precision floating point number. This can be any floating point (decimal point) number within the 16 bit size range
+- `string` - a data type for text data, can contain a combination of letters and numbers contained within quotation marks (""). Any numbers inside of quotation marks will be read as text, not as numeric.
+- You can find [more information about datatypes here](https://www.mathworks.com/help/matlab/data-types.html)
+## Comments
+- All programming languages use comments to separate explanatory text from code. In matlab this is done using the percent symbol (%), for instance:
+```Matlab
+% This comment will not be interpreted
+```
+- Additionally, you can separate the code within your scripts into sections by using two percent symbols (%%)
+```Matlab
+% This is a comment
+x = 10
+%% This is a comment that separates the code into sections
+```
+- Comments are good for explaining your code to anyone who might be reading it and should be used liberally
+## Paths
+- Once you start working with data outside of matlab, you will often have to use paths to tell matlab where things are stored
+- Different computer operating systems describe paths differently. For example, Linux and Mac typically use the forward slash (/) to separate folders, while Windows using the backslash (\)
+- To make your code easier to use across multiple systems, it is recommended to use the `fullfile` command as follows:
+```Matlab
+% one way to describe a folder location on a linux system
+folderName = "/home/username/Documents/myFile.txt"
+% a more compatible way to write the same folder location
+folderName = fullfile("/","home","username","Documents","myFile.txt")
+```
+## Using the semicolon
+- In matlab, the semicolon (;) suppresses code from printing to the command window
+- This becomes more useful as your code becomes more complicated and you have lines of code that you don't need to have printed to the screen. To update the code from the beginning of this file to be cleaner, we could add semicolons to our first few lines so they don't print to the screen:
+```Matlab
     x = 5;
     y = 3;
     z = x + y;
     stringToPrint = sprintf("The sum of x and y is: %d", z);
     disp(stringToPrint)
     ```
-- Functions, also often called commands, are a type of code that are written to perform a certain task, i.e. a function that takes a set of numbers and calculates the mean value
-    - These functions can either be installed on your machine (such as `mkdir`, `ls`, or the functions in FSL) or created by the user to be used in further scripts
-- A program is typically a set of code that is executable by your system, and is not usually edited by the end user, often made up of smaller scripts and functions, think of something like your web browser or Microsoft Office
-## The terminal window
-- The terminal window is the program that will display the command line and where we will work during much of our programming
-- Most programming that starts in the command line is based on the bash, also known as shell, programming language
-- These files have the suffix `.sh` and can be run from the command line by using either `./myScript.sh` or `shell myScript.sh`
-- All shell scripts should start with the `#!/bin/bash` shebang 
-- Most shell scripts are fairly simple, but can become more complicated (and more useful) as we start to incorporate more scripts and programs with advanced features
-- These scripts can access any functions available in your `PATH`
-    - The `PATH` on a unix machine is a variable where all of your binary directories are referenced after installation
-    - To check the current contents of the `PATH` on your machine, type the command `echo $PATH`
 ## Integrated Development Environments (IDE)
 - An IDE is a text editor program with dedicated functions for running and debugging various programming languages
-- Shell scripts can be written using anything that can write a text file, i.e. Text Editor, Visual Studio Code/Codium, or Vim in the command line
-- Using an IDE makes it easier for writing scripts and programs, since you no longer have to only run things line by line in the command line
-- In addition to IDEs, it's occasionally helpful to be able to edit scripts and other files within the command line, and to do that you can use a command line text editor like Vim or nano
-# Starting in the command line
-- On a linux machine you can open a new command line window either by opening `Terminal` on your computer or pressing `ctrl+alt+t`
-- Once open, you should see a window that looks like this:
-```shell
-hawkid@workstation:~$
-```
-- Where `hawkid` is the user you are logged in as, `workstation` is the hostname for the machine you are working on, and the `~` indicates that you are currently in your home directory 
-- In order to begin working on a new script, we will first make a directory `mkdir`, change into that directory `cd`, and create an empty file `touch`
-```shell
-mkdir -p projects/mouseNeuroimagingTraining
-cd projects/mouseNeuroimagingTraining
-touch createBidsFolders.sh
-```
-- In the command line, it should look something like this, where you can see the current directory gets updated after using the `cd` command
-```shell
-hawkid@workstation:~$ mkdir -p projects/mouseNeuroimagingTraining
-hawkid@workstation:~$ cd projects/mouseNeuroimagingTraining
-hawkid@workstation:~/projects/mouseNeuroimagingTraining$ touch createBidsFolders.sh
-```
-- Note the `-p` in the `mkdir` command. This is called an option, and is commonly used by commands to allow the user to provide certain information or to indicate certain options, in this case to create any intermediate directories if they don't yet exist
-- With the `createBidsFolders.sh` file created, we can open it and begin to add the necessary information for creating a script that will create the first folders of our BIDS formatted experiment (for further details, [read bidsBasics.md](/bidsBasics.md))
-# Installing dependencies
-We'll install some of the dependencies for neuroimaging as a means of practicing using the command line.
-## Installing FSL
-- As a way of practicing using the command line, we will install FSL using a premade python script which can be downloaded from the following link:
-[FSL downloads page](https://fsl.fmrib.ox.ac.uk/fsldownloads_registration)
-- After downloading, there should be a file called `fslinstaller.py` inside your `Downloads` folder
-- Change to this directory using the `cd` command and run the installer by calling `python` to run the `.py` file
-```
-cd Downloads
-python fslinstaller.py
-```
-- Once installation completes, try running the following command to check that the installation worked properly:
-```
-echo $FSLDIR
-```
-- This should return something like:
-```
-/usr/local/fsl
-```
-## Installing AFNI
-https://afni.nimh.nih.gov/pub/dist/doc/htmldoc/background_install/install_instructs/index.html
-## Installing ANTs
-
-## Virtual Machines
-- Since most of the work we will be doing is built around Unix operating systems, it is best to work on a Linux or Mac based machine
-- In order to perform many of the tasks on a Windows machine, we will have to set up a virtual machine
-- A virtual machine is a digital mirror of an operating system (in this case, Linux) that can be accessed via a remote terminal
-- The following page has information about various ways to access remote functionalities:
-[UIowa CLAS Remote Session Info](https://clas.uiowa.edu/linux/help/start/remote)
+- Matlab is a fully contained programming language, which means that the program itself acts as an IDE as well as the interpreter, while in other languages such as Python or C++, you might write your code in an IDE and then compile and run your code in a separate program
 ## Command glossary
-- `echo` - print text to screen
-- `cd` - 'change directory', if typed without following options, will change to your home folder
-- `ls` - 'list', prints the contents of a directory
-- `cp` - 'copy', equivalent to copying and pasting file, original stays in place
-- `mv` - 'move', equivalent to cutting and pasting file, original is deleted
-- `mkdir` - 'make directory', creates a new directory of the name given
-- `pwd` - 'primary working directory', prints the name of the current working directory
-- `rm` - 'remove', this deletes a file ***WARNING*** the command line does not have a recycling bin, so anything `rm`ed stays deleted!
-- `~` - symbol for home folder, i.e. `cd ~` will change directory to `/home/HawkID/`
-- `grep` - search function
-- `cat` - 'con***cat***enate', print contents of file to terminal window
-- `head` - read the start of a file and print to screen
-- `tail` - read teh end of a file and print to screen
-- `touch` - create a new file
-
+- `clc` - clears the command window
+- `clear` - clears the workspace
+- `fullfile` - converts a string of folder names into a working path location
 ## Helpful command line keyboard shortcuts
 - `ctrl+alt+t` - open a new terminal window
 - `ctrl+shift+c` - copy selection, the equivalent to `ctrl+c` in most programs
