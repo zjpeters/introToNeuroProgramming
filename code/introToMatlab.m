@@ -21,4 +21,9 @@ z = x + y;
 stringToPrint = sprintf("The sum of x and y is: %d", z);
 disp(stringToPrint)
 
-%%
+%% arrays and matrices
+testArray = [1,1, 2, 3, 5, 8];
+
+testMatrix = [[1,1,2,3,5,8];
+                   [13, 21, 34, 55, 89, 144]];
+testMatrix(1,3)

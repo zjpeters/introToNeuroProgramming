@@ -49,6 +49,25 @@
 - `double` - a double precision floating point number. This can be any floating point (decimal point) number within the 16 bit size range
 - `string` - a data type for text data, can contain a combination of letters and numbers contained within quotation marks (""). Any numbers inside of quotation marks will be read as text, not as numeric.
 - You can find [more information about datatypes here](https://www.mathworks.com/help/matlab/data-types.html)
+## Arrays, matrices, tables, cells, etc.
+- Matlab contains multiple containers for data that allow you to store more than one item in a single variable. These are especially useful when working with table data.
+- An array (sometimes called a vector in more mathematical settings) is typically defined as a one dimensional list of data, i.e.
+```Matlab
+testArray = [1,1, 2, 3, 5, 8];
+```
+- A matrix is typically a 2 dimensional array of data, i.e.
+```Matlab
+testMatrix = [[1,1,2,3,5,8];
+              [13, 21, 34, 55, 89, 144]];
+```
+- When indexing data in a matrix, you can use (row,column) format, i.e. to access the data in row 1, column 3
+```Matlab
+testMatrix(1,3)
+```
+- This will display the data at that location
+- A table contains rows and columns of data along with headers that can be used to access specific column data
+    - Within a table, each column must contain only one data type, i.e. a column of strings can only have strings, and a column of integers only integers
+- Cells are a matlab specific data type that allow the storage of multiple datatypes in various orientations and dimensions, meaning a row can contain multiple data types
 ## Comments
 - All programming languages use comments to separate explanatory text from code. In matlab this is done using the percent symbol (%), for instance:
 ```Matlab
